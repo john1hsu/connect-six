@@ -1,0 +1,83 @@
+<template>
+    <lightning-card title="Connect Six" icon-name="custom:custom1">
+        <div slot="actions">
+            <template lwc:if={game}>
+                <template lwc:if={canResign}>
+                    <lightning-button
+                        label={resignLabel}
+                        variant="destructive-text"
+                        onclick={handleResign}
+                        disabled={busy}
+                    ></lightning-button>
+                </template>
+                <lightning-button label="Back to lobby" onclick={handleBack} class="slds-m-left_x-small"></lightning-button>
+            </template>
+            <template lwc:else>
+                <lightning-button label="New game" variant="brand" onclick={handleNewGame} disabled={busy}></lightning-button>
+            </template>
+        </div>
+
+        <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+            <template lwc:if={game}>
+                <div class="players">
+                    <span class="player"><span class="dot dot_black"></span>{blackName}</span>
+                    <span class={statusClass} aria-live="polite">{statusText}</span>
+                    <span class="player"><span class="dot dot_white"></span>{whiteName}</span>
+                </div>
+
+                <div class="board-wrap">
+                    <div class={boardClass} aria-label="Connect Six board">
+                        <template for:each={rows} for:item="row">
+                            <div key={row.key} class="row">
+                                <template for:each={row.cells} for:item="cell">
+                                    <button
+                                        key={cell.key}
+                                        class={cell.cls}
+                                        data-idx={cell.idx}
+                                        aria-label={cell.label}
+                                        onclick={handleCellClick}
+                                    >
+                                        <span class={cell.stoneCls}></span>
+                                    </button>
+                                </template>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <p class="rules slds-text-body_small slds-text-color_weak">
+                    Black opens with one stone. After that, each player places two stones per turn.
+                    First to get six or more in a row (across, down or diagonal) wins.
+                </p>
+            </template>
+
+            <template lwc:else>
+                <template lwc:if={hasLobbyGames}>
+                    <ul class="slds-has-dividers_bottom-space">
+                        <template for:each={lobbyRows} for:item="g">
+                            <li key={g.id} class="slds-item lobby-row">
+                                <div>
+                                    <p class="slds-text-title_bold">{g.name}</p>
+                                    <p class="slds-text-body_small slds-text-color_weak">{g.detail}</p>
+                                </div>
+                                <lightning-button
+                                    label={g.actionLabel}
+                                    variant={g.variant}
+                                    data-id={g.id}
+                                    data-action={g.action}
+                                    onclick={handleOpen}
+                                    disabled={busy}
+                                ></lightning-button>
+                            </li>
+                        </template>
+                    </ul>
+                </template>
+                <template lwc:else>
+                    <p class="slds-p-vertical_large slds-text-align_center slds-text-color_weak">
+                        No open games. Start one, then ask a colleague to join from their Connect Six tab.
+                    </p>
+                </template>
+            </template>
+        </div>
+    </lightning-card>
+</template>

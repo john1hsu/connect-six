@@ -1,0 +1,6 @@
+{
+  "LastName": "Player Two",
+  "Email": "player2@example.com",
+  "permsets": ["Connect_Six_Player"],
+  "generatePassword": true
+}

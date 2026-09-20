@@ -1,0 +1,183 @@
+/* ---------- Lobby ---------- */
+.lobby-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+/* ---------- Players bar ---------- */
+.players {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.player {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 600;
+}
+
+.dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1px solid #333;
+}
+
+.dot_black {
+    background: #111;
+}
+
+.dot_white {
+    background: #fff;
+}
+
+.status {
+    padding: 0.2rem 0.75rem;
+    border-radius: 1rem;
+    background: #f3f3f3;
+}
+
+.status_active {
+    background: #0176d3;
+    color: #fff;
+}
+
+/* ---------- Board ---------- */
+.board-wrap {
+    display: flex;
+    justify-content: center;
+}
+
+.board {
+    width: min(100%, 640px);
+    padding: 10px;
+    border-radius: 4px;
+    background: #dcb35c;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.row {
+    display: grid;
+    grid-template-columns: repeat(19, 1fr);
+}
+
+.cell {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: default;
+}
+
+/* Grid lines: ::before is horizontal, ::after is vertical; trimmed at the edges. */
+.cell::before,
+.cell::after {
+    content: '';
+    position: absolute;
+    background: #5a4318;
+}
+
+.cell::before {
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1px;
+}
+
+.cell::after {
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+}
+
+.cell.left::before {
+    left: 50%;
+}
+
+.cell.right::before {
+    right: 50%;
+}
+
+.cell.top::after {
+    top: 50%;
+}
+
+.cell.bottom::after {
+    bottom: 50%;
+}
+
+.cell.playable {
+    cursor: pointer;
+}
+
+.cell:focus {
+    outline: none;
+}
+
+.cell:focus-visible {
+    outline: 2px solid #0176d3;
+    outline-offset: -2px;
+}
+
+/* ---------- Stones ---------- */
+.stone {
+    position: absolute;
+    inset: 7%;
+    z-index: 1;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.stone.star {
+    inset: 40%;
+    background: #5a4318;
+}
+
+.stone.black {
+    background: radial-gradient(circle at 35% 30%, #666, #111 60%);
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.stone.white {
+    background: radial-gradient(circle at 35% 30%, #fff, #d6d6d6 75%);
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+/* Hover preview in the player's own color. */
+.as-black .cell.playable:hover .stone {
+    inset: 7%;
+    background: rgba(0, 0, 0, 0.35);
+}
+
+.as-white .cell.playable:hover .stone {
+    inset: 7%;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+/* Stones from the latest turn get a small red marker. */
+.stone.last::after {
+    content: '';
+    position: absolute;
+    inset: 36%;
+    border-radius: 50%;
+    background: #e3242b;
+}
+
+.stone.win {
+    box-shadow: 0 0 0 3px #e3242b;
+}
+
+.rules {
+    margin-top: 0.75rem;
+    text-align: center;
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>White_Player__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>User playing white. Set when someone joins.</description>
+    <label>White Player</label>
+    <referenceTo>User</referenceTo>
+    <relationshipName>Connect_Six_Games_As_White</relationshipName>
+    <required>false</required>
+    <type>Lookup</type>
+</CustomField>
