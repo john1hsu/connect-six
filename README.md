@@ -34,7 +34,7 @@ sf org assign permset --name Connect_Six_Player
 sf apex run test --class-names ConnectSixControllerTest --result-format human --code-coverage
 
 # A second user to play against
-sf org create user --definition-file config/player2-user-def.json --alias player2
+sf org create user --definition-file config/player2-user-def.json --set-alias player2
 sf org display user --target-org player2      # shows the generated password
 sf org open
 ```
