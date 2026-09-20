@@ -17,8 +17,9 @@ Two-player Connect Six (Connect6), built as an unlocked package. Players go head
 | `ConnectSixController` | Game engine: create, join, place a stone, resign. Checks every rule on the server. |
 | `ConnectSixControllerTest` | Apex tests (needed for code coverage when you promote a version). |
 | `connectSix` (LWC) | Lobby and board UI. Uses `lightning/empApi` for live updates. |
-| `Connect_Six` tab | Opens the game from the App Launcher. |
-| `Connect_Six_Player` permission set | Read-only access to games, plus access to the controller, event and tab. |
+| `Connect_Six` tab | Holds the `connectSix` component. |
+| `Connect_Six` app | Standalone Lightning app containing the tab. This is what players open from the App Launcher. |
+| `Connect_Six_Player` permission set | Read-only access to games, plus access to the controller, event, tab and app. |
 
 ### Why the controller runs `without sharing`
 
@@ -39,7 +40,7 @@ sf org display user --target-org player2      # shows the generated password
 sf org open
 ```
 
-Open **Connect Six** from the App Launcher and click **New game**. Then log in as Player Two in a private or incognito window and click **Join**.
+Open the **Connect Six** app from the App Launcher and click **New game**. Then log in as Player Two in a private or incognito window and click **Join**.
 
 ## Package it
 
